@@ -1,0 +1,23 @@
+vim.keymap.set("n", "<leader>q", ":q<CR>", { desc = "Fast Close" })
+vim.keymap.set("n", "<leader>w", ":w<CR>", { desc = "Fast Save" })
+vim.keymap.set("n", "<leader>wq", ":wq<CR>", { desc = "Fast Save and Close" })
+
+vim.keymap.set("n", "<A-j>", ":m .+1<CR>==", { noremap = true, silent = true, desc = "Move line down" })
+vim.keymap.set("n", "<A-k>", ":m .-2<CR>==", { noremap = true, silent = true, desc = "Move line up" })
+vim.keymap.set("v", "<A-j>", ":m '>+1<CR>gv=gv", { noremap = true, silent = true, desc = "Move lines down" })
+vim.keymap.set("v", "<A-k>", ":m '<-2<CR>gv=gv", { noremap = true, silent = true, desc = "Move lines down" })
+
+vim.keymap.set("n", "<leader>ri", function()
+	local view = vim.fn.winsaveview()
+	vim.cmd("normal! gg=G")
+	vim.fn.winrestview(view)
+	print("Re-indented file!")
+end, { desc = "Re-indent file" })
+
+vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, { desc = "Read error message" })
+vim.keymap.set("n", ",d", function()
+	vim.diagnostic.jump({ count = -1, float = true })
+end, { desc = "Go to previous error" })
+vim.keymap.set("n", ".d", function()
+	vim.diagnostic.jump({ count = 1, float = true })
+end, { desc = "Go to next error" })
